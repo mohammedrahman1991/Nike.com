@@ -1,14 +1,9 @@
 import org.openqa.selenium.*;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.awt.*;
-import java.awt.event.InputEvent;
+
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
  /*
     Note to reader: this was made quickly, for job application for Estee Lauder
@@ -22,21 +17,19 @@ import java.util.concurrent.TimeUnit;
 */
 
 
-public class Test1 extends Utility {
+public class Test1 extends loginPageElements {
 
-        @Test(priority = 0)
-            public void validateURLv2(){
-
-            String baseUrl = "https://www.esteelauder.com/products/19239/product-catalog/last-chance";
-            String expectedTitle = "Last Chance Beauty Products | Estée Lauder";
-            String actualTitle = "";
-            driver.get(baseUrl);
-
-            // get the actual value of the title
-            actualTitle = driver.getTitle();
-            System.out.println(actualTitle);
-            Assert.assertEquals(actualTitle,expectedTitle);
+    @Test(priority = 0)
+    public  void LoginPage() {
+        String baseUrl = "https://www.esteelauder.com/";
+        clickbyXpath(SignInButton);
+        SendKeysId(EmailBoxID, "mohammedb.rahman2018@gmail.com");
+        SendKeysId(PasswordBoxId, "random1234");
+        clickbyXpath(SignUppath);
+        SendKEYSxpath(EmailBoxPostFailurePath , "mohammedb.rahman2018@gmail.com");
     }
+
+
     @Test(priority = 1)
     public void validateAddtoCart() {
         String baseUrl = "https://www.esteelauder.com/product/684/25713/product-catalog/skincare/cleanser-makeup-remover/perfectly-clean/multi-action-foam-cleanserpurifying-mask?size=5.0_oz.";
@@ -66,6 +59,7 @@ public class Test1 extends Utility {
         String cartItemName= element.getText().toLowerCase(Locale.ROOT);
         Assert.assertTrue(cartItemName.contains(itemname.toLowerCase(Locale.ROOT)));
     }
+
 
     @AfterMethod
     public void postSignUp() {

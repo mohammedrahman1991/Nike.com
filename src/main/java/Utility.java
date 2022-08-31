@@ -2,7 +2,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.BeforeClass;
+import org.testng.Assert;
+import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -30,6 +31,34 @@ public class Utility {
         driver.manage().deleteAllCookies();
         Dimension dem = new Dimension(1350, 850);
         driver.manage().window().setSize(dem);
+
+
+        String baseUrl = "https://www.esteelauder.com/";
+        String expectedTitle = "Estée Lauder | Beauty Products, Skin Care & Makeup";
+        String actualTitle = "";
+        driver.get(baseUrl);
+        System.out.println(baseUrl);
+
+        // get the actual value of the title
+        actualTitle = driver.getTitle();
+        System.out.println(actualTitle);
+        Assert.assertEquals(actualTitle,expectedTitle);
+
+    }
+
+    public void clickbyXpath(String elem){
+        driver.findElement(By.xpath(elem)).click();
+
+    }
+
+    public void clickbyID(String webelement){
+        driver.findElement(By.id(webelement)).click();
+    }
+    public void SendKEYSxpath(String elem, String keys){
+        driver.findElement(By.xpath(elem)).sendKeys(keys);
+    }
+    public void SendKeysId(String elem, String keys){
+        driver.findElement(By.id(elem)).sendKeys(keys);
     }
 
 
@@ -45,11 +74,22 @@ public class Utility {
         actions.sendKeys(Keys.PAGE_DOWN).build().perform();
     }
 
-    public static void holdYourHorses(int seconds){
-        try{
-            Thread.sleep(seconds*1000);
-        }catch (Exception InterruptedException){
+    public static void holdYourHorses(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (Exception InterruptedException) {
             System.out.println("Thread exception");
         }
+    }
+
+        @AfterMethod
+        public void postSignUp() {
+            System.out.println(driver.getCurrentUrl());
+
+        }
+
+        @AfterSuite
+        public void afterClass() {
+            driver.quit();
     }
 }
