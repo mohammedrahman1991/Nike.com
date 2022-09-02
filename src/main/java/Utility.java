@@ -60,7 +60,18 @@ public class Utility {
     public void SendKeysId(String elem, String keys){
         driver.findElement(By.id(elem)).sendKeys(keys);
     }
+////
+////    //ASSERTIONS methods
+    public void print1(String elem) {
+        System.out.println(elem);
 
+    }
+
+    public void isShown(String elem) {
+        Boolean Display = driver.findElement(By.xpath(elem)).isDisplayed();
+//To print the value
+        System.out.println("Element displayed is :"+Display);
+    }
 
     public void tryHover(String e){
         Actions actions = new Actions(driver);
@@ -81,6 +92,7 @@ public class Utility {
             System.out.println("Thread exception");
         }
     }
+
 
         @AfterMethod
         public void postSignUp() {

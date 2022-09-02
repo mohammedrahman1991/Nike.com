@@ -19,18 +19,37 @@ import java.util.Locale;
 
 public class Test1 extends loginPageElements {
 
+    /**
+     * The above function is a test case that tests the login page of the website.
+     */
+
     @Test(priority = 0)
-    public  void LoginPage() {
+    public  void LoginPage() throws InterruptedException {
         String baseUrl = "https://www.esteelauder.com/";
         clickbyXpath(SignInButton);
+        //--------------
+        System.out.println("Asssertions for loginPage begins");
+        Thread.sleep(2000);
+
+        String Actual = driver.findElement(By.xpath(SignInButton)).getText();
+        print1(Actual);
+
+        Assert.assertEquals(Actual,"SIGN IN");
+        print1("Sign In button text is valid /true = test passed ");
+        Thread.sleep(2000);
+        //--------------
+        isShown(LogoLink);
         SendKeysId(EmailBoxID, "mohammedb.rahman2018@gmail.com");
         SendKeysId(PasswordBoxId, "random1234");
         clickbyXpath(SignUppath);
         SendKEYSxpath(EmailBoxPostFailurePath , "mohammedb.rahman2018@gmail.com");
+       // ---------------
     }
-
-
-    @Test(priority = 1)
+    /**
+     * This function will open a browser, navigate to a specific URL, click on a button, and then verify that the item was
+     * added to the cart
+     */
+    @Test(priority = 0, enabled = false)
     public void validateAddtoCart() {
         String baseUrl = "https://www.esteelauder.com/product/684/25713/product-catalog/skincare/cleanser-makeup-remover/perfectly-clean/multi-action-foam-cleanserpurifying-mask?size=5.0_oz.";
         driver.get(baseUrl);
