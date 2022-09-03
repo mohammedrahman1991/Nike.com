@@ -3,6 +3,8 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 
  /*
@@ -21,8 +23,8 @@ public class Test1 extends loginPageElements {
 
     /**
      * The above function is a test case that tests the login page of the website.
+     * Then we click on ForgotPassword and Validate Customer Service Number is True or Not
      */
-
     @Test(priority = 0)
     public  void LoginPage() throws InterruptedException {
         String baseUrl = "https://www.esteelauder.com/";
@@ -39,10 +41,38 @@ public class Test1 extends loginPageElements {
         Thread.sleep(2000);
         //--------------
         isShown(LogoLink);
+        isShownID(EmailBoxID);
+        isShownID(PasswordBoxId);
+        isShown(SignInButton);
+
+
         SendKeysId(EmailBoxID, "mohammedb.rahman2018@gmail.com");
         SendKeysId(PasswordBoxId, "random1234");
+
+        holdYourHorses(5);
+        try{
+            driver.findElement(By.xpath("//span[@class='drawer-formatter__close']")).click();
+        }catch (Exception NoSuchElementException){
+            System.out.println("Detected no pop up elem");
+        }
+        String ActualTextFB = driver.findElement(By.cssSelector(FBloginDiscplaimer)).getText();
+        print1(ActualTextFB);
+
+        Assert.assertEquals(ActualTextFB,"By clicking “Continue with Facebook\" " +
+                "I agree to Estée Lauder’s Terms & Conditions and Privacy Policy.");
+        print1("FB login disclaimer is Present  = test passed ");
+        Thread.sleep(2000);
+
         clickbyXpath(SignUppath);
         SendKEYSxpath(EmailBoxPostFailurePath , "mohammedb.rahman2018@gmail.com");
+
+        // Validate Correct Customer Service Phone
+        ArrayList<String> PhoneNum = new ArrayList<>(Arrays.asList(driver.findElement(By.xpath(CustomerServicePhoneBoxText)).getText().split(" ")));
+        // get number from splitting the text field from above element
+        System.out.println("This is actual phoneNumber: "+ PhoneNum.get(15));
+        String ActualPhoneNum = PhoneNum.get(15);
+        Assert.assertEquals(ActualPhoneNum,"1.877.311.3883.");
+        print1("Phone Number is Valid -Present : Test Passed");
        // ---------------
     }
     /**

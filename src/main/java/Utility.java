@@ -73,6 +73,13 @@ public class Utility {
         System.out.println("Element displayed is :"+Display);
     }
 
+    public void isShownID(String elem) {
+        Boolean Display = driver.findElement(By.id(elem)).isDisplayed();
+//To print the value
+        System.out.println("Element displayed is :"+Display);
+    }
+
+
     public void tryHover(String e){
         Actions actions = new Actions(driver);
         WebElement menuOption = driver.findElement(By.xpath(e));

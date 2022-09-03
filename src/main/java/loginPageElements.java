@@ -15,6 +15,8 @@ public class loginPageElements extends Utility{
         String LogoLink = "(//a[@class='page-branding__logo js-brand-logo-link'])[1]";
         String PasswordBoxId = "form--signin--field--PASSWORD";
         String SignUppath = "//a[contains(@class, 'sign-in-component__fpw')]";
+        String FBloginDiscplaimer = ".return-user-disclaimer.js-return-user-disclaimer";
+        String CustomerServicePhoneBoxText = "//p[contains(text(),'If you need help or would like to order by phone c')]";
         String EmailBoxPostFailurePath = "//input[@placeholder='* Email Address']";
 
 
